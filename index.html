@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HubSpot Subscription Form - Styled</title>
+    <style>
+        /* Container styling */
+        .subscription-form-wrapper {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Hide HubSpot's default submit button positioning */
+        #hsForm_c2078ec7-39af-496b-a385-e023d0834e56 .hs-submit {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            margin: 0 !important;
+        }
+
+        /* Style the form container */
+        #hsForm_c2078ec7-39af-496b-a385-e023d0834e56 .hs-form-field {
+            position: relative;
+            margin-bottom: 0 !important;
+        }
+
+        /* Email input field styling */
+        #hsForm_c2078ec7-39af-496b-a385-e023d0834e56 input[type="email"] {
+            width: 100% !important;
+            padding: 15px 130px 15px 20px !important; /* Right padding for button space */
+            border: 2px solid #e0e0e0 !important;
+            border-radius: 50px !important;
+            font-size: 16px !important;
+            outline: none !important;
+            transition: border-color 0.3s ease !important;
+            box-sizing: border-box !important;
+        }
+
+        #hsForm_c2078ec7-39af-496b-a385-e023d0834e56 input[type="email"]:focus {
+            border-color: #2E75B6 !important;
+        }
+
+        /* Submit button styling */
+        #hsForm_c2078ec7-39af-496b-a385-e023d0834e56 input[type="submit"] {
+            background-color: #237a8a !important;
+            color: white !important;
+            border: none !important;
+            border-radius: 50px !important;
+            padding: 10px 25px !important;
+            font-size: 14px !important;
+            font-weight: 600 !important;
+            cursor: pointer !important;
+            transition: background-color 0.3s ease !important;
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            margin: 0 !important;
+            z-index: 10;
+        }
+
+        #hsForm_c2078ec7-39af-496b-a385-e023d0834e56 input[type="submit"]:hover {
+            background-color: #1a5c6a !important;
+        }
+
+        /* Hide labels if you want clean look */
+        #hsForm_c2078ec7-39af-496b-a385-e023d0834e56 label {
+            display: none !important;
+        }
+
+        /* Remove default margins */
+        #hsForm_c2078ec7-39af-496b-a385-e023d0834e56 .hs-form-field,
+        #hsForm_c2078ec7-39af-496b-a385-e023d0834e56 .hs-input {
+            margin-bottom: 0 !important;
+        }
+
+        /* Ensure form doesn't have extra spacing */
+        #hsForm_c2078ec7-39af-496b-a385-e023d0834e56 {
+            position: relative;
+        }
+
+        /* Error message styling (optional) */
+        #hsForm_c2078ec7-39af-496b-a385-e023d0834e56 .hs-error-msgs {
+            margin-top: 10px !important;
+            font-size: 14px !important;
+            color: #d32f2f !important;
+        }
+
+        /* Responsive design */
+        @media (max-width: 500px) {
+            #hsForm_c2078ec7-39af-496b-a385-e023d0834e56 input[type="email"] {
+                padding: 12px 110px 12px 15px !important;
+                font-size: 14px !important;
+            }
+
+            #hsForm_c2078ec7-39af-496b-a385-e023d0834e56 input[type="submit"] {
+                padding: 8px 20px !important;
+                font-size: 13px !important;
+                right: 6px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="subscription-form-wrapper">
+        <!-- HubSpot Form Container -->
+        <div id="hubspot-form-container"></div>
+    </div>
+
+    <!-- HubSpot Form Embed Script -->
+    <script charset="utf-8" type="text/javascript" src="//js-eu1.hsforms.net/forms/embed/v2.js"></script>
+    <script>
+        // Wait for HubSpot script to fully load
+        window.addEventListener('message', function(event) {
+            if (event.data.type === 'hsFormCallback' && event.data.eventName === 'onFormReady') {
+                console.log('HubSpot form ready');
+            }
+        });
+
+        // Alternative: Use setTimeout to ensure library loads
+        (function loadForm() {
+            if (typeof hbspt !== 'undefined') {
+                hbspt.forms.create({
+                    portalId: "147232482",
+                    formId: "c2078ec7-39af-496b-a385-e023d0834e56",
+                    region: "eu1",
+                    target: '#hubspot-form-container',
+                    css: '', // Disable HubSpot's default CSS
+                    onFormReady: function($form) {
+                        // Add placeholder to email field
+                        $form.find('input[type="email"]').attr('placeholder', 'Enter your email address');
+                        
+                        // Change submit button text if needed
+                        $form.find('input[type="submit"]').val('Subscribe');
+                    }
+                });
+            } else {
+                // Retry after 100ms if not loaded yet
+                setTimeout(loadForm, 100);
+            }
+        })();
+    </script>
+</body>
+</html>
