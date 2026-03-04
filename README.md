@@ -2,6 +2,8 @@
 
 A styled HubSpot subscription form with the submit button positioned inside the email field.
 
+https://shadrack-ago.github.io/hubspot-legacy-form-subscription/ 
+
 ## Features
 
 - Email input field with rounded corners
